@@ -44,7 +44,7 @@ if(!isset($_SERVER['CONFIG_FILE'])){
 }
 
 /* Define common locatitions */
-define ("CONFIG_TEMPLATE_DIR", "../contrib");
+define ("CONFIG_TEMPLATE_DIR", "/usr/share/doc/gosa");
 define ("TEMP_DIR","/var/cache/gosa/tmp");
 
 /* Define get_list flags */
@@ -73,7 +73,7 @@ define('DES3_CBC_MD5',5);
 define('DES3_CBC_SHA1',16);
 
 /* Include required files */
-include_once("class_location.inc");
+require_once("/var/cache/gosa/class.cache");
 require_once ("functions_debug.inc");
 require_once ("accept-to-gettext.inc");
 
@@ -3575,6 +3575,11 @@ function image($path, $action= "", $title= "", $align= "middle")
     session::global_set('img-styles', unserialize(file_get_contents("$BASE_DIR/ihtml/themes/$theme/img.styles")));
   }
   $styles= session::global_get('img-styles');
+
+  /* If there's nothing available, just return nothing */
+  if (!array_key_exists($path, $styles)) {
+    return "";
+  }
 
   /* Extract labels from path */
   if (preg_match("/\.png\[(.*)\]$/", $path, $matches)) {
