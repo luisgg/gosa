@@ -1,3 +1,9 @@
+gosa (2.7.4-4.2~aurex1) precise; urgency=low
+
+  * Rebuild for aurex 12.04 precise
+
+ -- Luis Antonio Garcia Gisbert <luisgg@gmail.com>  Mon, 01 Apr 2013 23:40:54 +0200
+
 gosa (2.7.4-4.2) unstable; urgency=low
 
   [ Jonathan Wiltshire ]
