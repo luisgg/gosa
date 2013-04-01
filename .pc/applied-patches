@@ -1,0 +1,7 @@
+smarty3.patch
+style-robustness.patch
+01_fix_smarty_location.patch
+02_fix_template_location.patch
+03_fix_class_mapping.patch
+04_fix_locale_location.patch
+no-image-warning.patch

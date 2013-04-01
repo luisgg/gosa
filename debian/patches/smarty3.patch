@@ -1,0 +1,44 @@
+--- a/gosa-core/html/index.php
++++ b/gosa-core/html/index.php
+@@ -167,6 +167,7 @@
+ 
+ /* Enable compressed output */
+ if ($config->get_cfg_value("core","sendCompressedOutput") != "") {
++    ob_end_clean();
+     ob_start("ob_gzhandler");
+ }
+ 
+--- a/gosa-core/html/main.php
++++ b/gosa-core/html/main.php
+@@ -80,6 +80,7 @@
+ 
+ /* Enable compressed output */
+ if ($config->get_cfg_value("core","sendCompressedOutput") == "true"){
++  ob_end_clean();
+   ob_start("ob_gzhandler");
+ }
+ 
+--- a/gosa-core/include/smartyAddons/block.t.php
++++ b/gosa-core/include/smartyAddons/block.t.php
+@@ -72,6 +72,10 @@
+  */
+ function smarty_block_t($params, $text, &$smarty)
+ {
++	if ($text == "") {
++		return "";
++	}
++
+ 	$text = stripslashes($text);
+ 	
+ 	// set escape mode
+--- a/gosa-core/plugins/personal/posix/trustModeDialog/class_trustModeDialog.inc
++++ b/gosa-core/plugins/personal/posix/trustModeDialog/class_trustModeDialog.inc
+@@ -180,7 +180,7 @@
+             $smarty->assign("emptyArrAccess",false);
+ 
+ 
+-        $smarty->assign($smarty->assign("use_trustmode",in_array_strict("trustmode", $this->multi_boxes)));
++        $smarty->assign("use_trustmode", in_array_strict("trustmode", $this->multi_boxes));
+         $smarty->assign("multiple_support" , $this->multiple_support_active);
+ #        $this->trustList->update();
+         $smarty->assign("trustList", $this->trustList->render());
